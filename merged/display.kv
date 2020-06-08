@@ -1,0 +1,25 @@
+<Display>:
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        Bios:
+            id: _bios
+            size_hint:1, None
+            height: root.height - (_scanner1.height + _scanner2.height + _status.height)
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            orientation: 'vertical'
+            Scanner1:
+                id: _scanner1
+                size_hint: 1,None
+                height: root.height/10
+            Scanner2:
+                id: _scanner2
+                size_hint: 1,None
+                height: root.height/10
+            Status:
+                id: _status
+                size_hint: 1,None
+                height: root.height/10
