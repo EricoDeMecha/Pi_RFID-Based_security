@@ -32,6 +32,9 @@ class Display(AnchorLayout):
 
     def __init__(self, **kwargs):
         super(Display,self).__init__(**kwargs)
+        lock = threading.Lock()
+        threading.Thread(target=self.handle_key, args=(lock,)).start()
+        threading.Thread(target=self.handle_card, args=(lock,)).start()
 
     def get_keys(self):
         random.shuffle(self.keys)
