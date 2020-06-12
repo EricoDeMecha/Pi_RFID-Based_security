@@ -32,17 +32,6 @@ class Display(AnchorLayout):
 
     def __init__(self, **kwargs):
         super(Display,self).__init__(**kwargs)
-        Clock.schedule_interval(self.key_thread_handler(), 1)
-        Clock.schedule_interval(self.card_thread_handler(), 3)
-
-    def  key_thread_handler(self):
-        lock = threading.Lock()
-        keyThread = threading.Thread(target=self.handle_key, args=(lock,))
-        keyThread.start()
-    def card_thread_handler(self):
-        lock = threading.Lock()
-        cardThread = threading.Thread(target=self.handle_card, args=(lock,))
-        cardThread.start()
 
     def get_keys(self):
         random.shuffle(self.keys)
@@ -90,11 +79,11 @@ class Display(AnchorLayout):
             try:
                 card_data = key_dict[aKey]
                 print(card_data)
-                print("[INFO] Verification complete")
+                self.ids.stat.text = "[INFO] Verification complete"
                 # remove the key value pair
                 del key_dict[str(aKey)]
             except KeyError:
-                print(f"[{aKey}] Card is unrecognized or its key not scanned yet")
+                self.ids.scan2.text = f"[{aKey}] Card unrecognized"
             key_dict.close()
 
         else:
@@ -102,9 +91,8 @@ class Display(AnchorLayout):
             key_dict = SqliteDict(self.dict_sqlite, autocommit=True)
             try:
                 key_dict[aKey] = Val
-                print(key_dict[aKey])
             except KeyError:
-                print(f"[{aKey}] Key already scanned")
+                self.ids.scan1.text = f"[{aKey}] Key already scanned"
 
             key_dict.close()
 
