@@ -1,8 +1,13 @@
 from kivy.app import App
+from kivy.properties import ObjectProperty
 from kivy.uix.anchorlayout import  AnchorLayout
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.clock import Clock
+#sub-class imports
+
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 
 import random
 import sqlite3
@@ -15,6 +20,22 @@ Builder.load_file("bios.kv")
 Builder.load_file("scanner1.kv")
 Builder.load_file("scanner2.kv")
 Builder.load_file("status.kv")
+# The sub-classes
+class Bios(GridLayout):
+    reg = ObjectProperty(None)
+    serial_no = ObjectProperty(None)
+    phone_no = ObjectProperty(None)
+    card = ObjectProperty(None)
+
+class Scanner1(BoxLayout):
+    scan1 = ObjectProperty(None)
+
+class Scanner2(BoxLayout):
+    scan2 = ObjectProperty(None)
+
+class Status(BoxLayout):
+    stat = ObjectProperty(None)
+
 
 class Display(AnchorLayout):
     keys = ['key0','key1','key2','key3','key4','key5','key6','key7','key8','key9','key10','key11','key12','key13'
@@ -69,6 +90,7 @@ class Display(AnchorLayout):
 
     def handle_card(self,lock):
         card_val = self.get_card()
+        self.ids._status.stat.text = ''
         lock.acquire()
         self.sqliteFileIO(card_val)
         lock.release()
@@ -96,12 +118,16 @@ class Display(AnchorLayout):
             global card_data
             try:
                 card_data = key_dict[aKey]
-                print(card_data)
-                self.ids.stat.text = "[INFO] Verification complete"
+                self.ids._bios.reg.text = '{}'.format(f'{card_data[0]}')
+                self.ids._bios.serial_no.text = '{}'.format(f'{card_data[1]}')
+                self.ids._bios.phone_no.text = '{}'.format(f'{card_data[2]}')
+                self.ids._bios.card.text = '{}'.format(f'{card_data[-1]}')
+                self.ids._status.stat.text = "[INFO] Verification complete"
                 # remove the key value pair
                 del key_dict[str(aKey)]
+                #reset the status
             except KeyError:
-                self.ids.scan2.text = f"[{aKey}] Card unrecognized"
+                self.ids._scanner2.scan2.text = f"[{aKey}] Card unrecognized(Scan Key)"
             key_dict.close()
 
         else:
@@ -110,7 +136,7 @@ class Display(AnchorLayout):
             try:
                 key_dict[aKey] = Val
             except KeyError:
-                self.ids.scan1.text = f"[{aKey}] Key already scanned"
+                self.ids._scanner1.scan1.text = f"[{aKey}] Key already scanned"
 
             key_dict.close()
 
