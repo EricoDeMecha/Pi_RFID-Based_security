@@ -32,9 +32,24 @@ class Display(AnchorLayout):
 
     def __init__(self, **kwargs):
         super(Display,self).__init__(**kwargs)
+        self.register_event_type('on_card')
+        self.register_event_type('on_key')
+        Clock.schedule_interval(self.keyEvent, 1)
+        Clock.schedule_interval(self.cardEvent, 3)
+
+    def on_key(self):
         lock = threading.Lock()
         threading.Thread(target=self.handle_key, args=(lock,)).start()
+    def on_card(self):
+        lock = threading.Lock()
         threading.Thread(target=self.handle_card, args=(lock,)).start()
+    def keyEvent(self,dt):
+        print(dt)
+        self.on_key()
+    def cardEvent(self,dt):
+        print(dt)
+        self.on_card()
+
 
     def get_keys(self):
         random.shuffle(self.keys)
