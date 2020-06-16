@@ -1,38 +1,36 @@
 <Bios>:
-    cols: 2
     reg: _reg
     serial_no: _serial_no
     phone_no: _phone_no
     cardData: _cardData
     keyData: _keyData
 
+    cols: 2
     Label:
         font_size: root.height/10
         text: "Reg. No.: "
     TextInput:
         id: _reg
-        text: ''
+        focus: True
+        on_text_validate: root.validate_reg()
     Label:
         font_size: root.height/10
         text: "Serial No.: "
     TextInput:
         id: _serial_no
-        text: ''
     Label:
         font_size: root.height/10
         text: "Phone No.: "
     TextInput:
         id: _phone_no
-        text: ''
+        hint_text: 'e.g +254700000000'
     Label:
         font_size: root.height/10
         text: "Key Data: "
     TextInput:
         id: _keyData
-        text: ''
     Label:
         font_size: root.height/10
         text: "Card Data: "
     TextInput:
         id: _cardData
-        text: ''
