@@ -1,26 +1,10 @@
-import threading
-
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty
-from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-
 Builder.load_file('bios.kv')
 Builder.load_file('status.kv')
-
-class Bios(GridLayout):
-    reg = ObjectProperty(None)
-    serial_no = ObjectProperty(None)
-    phone_no = ObjectProperty(None)
-    cardData = ObjectProperty(None)
-    keyData = ObjectProperty(None)
-
-class Status(BoxLayout):
-    Card = ObjectProperty(None)
-    Key  = ObjectProperty(None)
 
 class Writer(BoxLayout):
     def __init__(self,**kwargs):
@@ -56,14 +40,6 @@ class Writer(BoxLayout):
         self.ids.bios.cardData.text = ''
         self.ids.bios.keyData.text = ''
 
-    def validate_item(self, item, lock):
-        #universal check
-        lock.acquire()
-        print(item)
-        lock.release()
-    def validate_reg(self):
-        lock = threading.Lock()
-        threading.Thread(target=self.validate_item, args=('reg',lock)).start()
 class writeApp(App):
     def build(self):
         return Writer()
