@@ -14,9 +14,6 @@ class GenerateData():
     pre_reg = "ENM221-00"
     post_reg = "/2017"
     regs = []
-    # secret codes
-    const_scode = "secret_"
-    scodes = []
     # phone_no
     num_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     pre_nos = "07"
@@ -31,7 +28,6 @@ class GenerateData():
         self.checkDbExistence()
         self.generate_reg()
         self.generate_phoneNos()
-        self.generate_scode()
         self.generate_key()
         self.generate_card()
         self.generate_serial()
@@ -51,11 +47,6 @@ class GenerateData():
             reg_str = self.pre_reg + str(i) + self.post_reg
             self.regs.append(reg_str)
 
-    def generate_scode(self):
-        for i in range(30):
-            scode_str = self.const_scode + self.const_key + self.const_card + str(i)
-            self.scodes.append(scode_str)
-
     def generate_phoneNos(self):
         global num
         for i in range(30):
@@ -73,7 +64,7 @@ class GenerateData():
 
     def generate_data(self):
         for i in range(30):
-            query_tuple  = (self.regs[i],self.serial_nos[i],self.phone_nos[i],self.scodes[i],self.keys[i],self.cards[i])
+            query_tuple  = (self.regs[i],self.serial_nos[i],self.phone_nos[i],self.keys[i],self.cards[i])
             self.query_datalist.append(query_tuple)
 
     def insertDB(self,my_data):
@@ -81,7 +72,7 @@ class GenerateData():
         try:
             con = sqlite3.connect(self.db_name)
             cur = con.cursor()
-            cur.executemany('INSERT INTO t_data VALUES (?,?,?,?,?,?)', my_data)
+            cur.executemany('INSERT INTO t_data VALUES (?,?,?,?,?)', my_data)
             con.commit()
         except sqlite3.Error as e:
             if con:
@@ -112,7 +103,7 @@ class GenerateData():
         try:
             con = sqlite3.connect(self.db_name)
             cur = con.cursor()
-            cur.execute('CREATE TABLE t_data( reg_no TEXT PRIMARY KEY,serial_no TEXT, phone_no TEXT NOT NULL,secret_code TEXT NOT NULL,uid_tag1 TEXT NOT NULL , uid_tag2 TEXT NOT NULL)')
+            cur.execute('CREATE TABLE t_data( reg_no TEXT PRIMARY KEY,serial_no TEXT, phone_no TEXT NOT NULL,uid_tag1 TEXT NOT NULL , uid_tag2 TEXT NOT NULL)')
             con.commit()
         except sqlite3.Error as e:
             if con:

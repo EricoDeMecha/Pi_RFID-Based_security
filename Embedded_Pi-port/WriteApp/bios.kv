@@ -22,7 +22,7 @@
         id: _serial_no
         focus: True
         multiline: False
-        on_focus: root.validate_reg(self.text)
+        on_focus: root.validate_serial(self.text)
     Label:
         font_size: root.height/10
         text: "Phone No.: "
@@ -31,7 +31,7 @@
         hint_text: 'e.g +254700000000'
         focus: True
         multiline: False
-        on_focus: root.validate_reg(self.text)
+        on_focus: root.validate_phone(self.text)
     Label:
         font_size: root.height/10
         text: "Key Data: "
@@ -39,7 +39,7 @@
         id: _keyData
         focus: True
         multiline: False
-        on_focus: root.validate_reg(self.text)
+        on_focus: root.validate_key(self.text)
     Label:
         font_size: root.height/10
         text: "Card Data: "
@@ -47,4 +47,4 @@
         id: _cardData
         focus: True
         multiline: False
-        on_focus: root.validate_reg(self.text)
+        on_focus: root.validate_card(self.text)
