@@ -65,10 +65,8 @@ class Display(AnchorLayout):
         lock = threading.Lock()
         threading.Thread(target=self.handle_card, args=(lock,)).start()
     def keyEvent(self,dt):
-        print(dt)
         self.on_key()
     def cardEvent(self,dt):
-        print(dt)
         self.on_card()
 
 
@@ -78,7 +76,7 @@ class Display(AnchorLayout):
 
     def handle_key(self,lock):
         key_val  = self.get_keys()# get the key
-        key_data = self.pullFromDb(key_val,4)# get the key-related data from the database
+        key_data = self.pullFromDb(key_val,3)# get the key-related data from the database
         # use  the card as the key
         lock.acquire()
         self.sqliteFileIO(key_data[-1], key_data)
