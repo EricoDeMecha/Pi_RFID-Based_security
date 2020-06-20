@@ -1,3 +1,8 @@
-## RFID-Based Security 
+## Safe-Laptop
 
-Intergrated interface using python kivy 1.0 and data storage mainly using sqlite3
+These project uses RFID technology to track and record student's laptop
+at both entry and exit of school autonomously, and paperless,at the shortest
+time possible.
+
+### Hardware
+ 

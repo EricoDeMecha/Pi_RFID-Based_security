@@ -16,7 +16,7 @@ class GenerateData():
     regs = []
     # phone_no
     num_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    pre_nos = "07"
+    pre_nos = "+2547"
     phone_nos = []
     # serial
     serial_nos = []
