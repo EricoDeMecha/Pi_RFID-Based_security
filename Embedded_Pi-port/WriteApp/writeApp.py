@@ -1,4 +1,7 @@
 import sqlite3
+import threading
+import RPi.GPIO as GPIO
+from mfrc522 import SimpleMFRC522
 
 from kivy.app import App
 from kivy.clock import Clock
@@ -66,12 +69,16 @@ class Writer(BoxLayout):
                           content=Label(markup=True,text="[color=00FF00][b]Data saved[/b][/color]"),
                           auto_dismiss=True)
             popup.open()
+            # start the two : card and key writes
+            keyThread = threading.Thread(target=self.writeKey, args=(self.ids.bios.keyData.text))
+            keyThread.start()
+            cardThread = threading.Thread(target=self.writeCard, args=(self.ids.bios.cardData.text))
+            cardThread.start()
             # indicate achievement
             self.status_val = 1
             # clear window
             self.clearWindowData()
             Clock.schedule_interval(self.pb_checker, 1)
-            Clock.schedule_interval(self.adder, 3)
             cursor.close()
         except sqlite3.Error as error:
             popup = Popup(title = "Error" , size_hint=(None, None), size=(Window.width/2,Window.height/3),
@@ -99,8 +106,24 @@ class Writer(BoxLayout):
             self.ids.pb.value = 100
             self.ids.bios.cardData.text = ''
             self.ids.status.cardBtn.text = "Card Written"
-    def adder(self,dt):
-        self.status_val = self.status_val + 1
+
+    def writeCard(self,text):
+        reader = SimpleMFRC522()
+        try:
+            reader.write(text)
+            self.status_val = self.status_val + 1
+        finally:
+            GPIO.cleanup()  # this can only be available in the pi
+
+    def writeKey(self,text):
+        reader = SimpleMFRC522()
+        try:
+            reader.write(text)
+            self.status_val = self.status_val + 1
+        finally:
+            GPIO.cleanup()  # this can only be available in the pi
+
+
 class writeApp(App):
     def build(self):
         return Writer()
