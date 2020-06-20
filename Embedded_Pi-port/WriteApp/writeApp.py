@@ -1,19 +1,25 @@
 import sqlite3
 
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-from kivy.uix.progressbar import ProgressBar
 
 Builder.load_file('bios.kv')
 Builder.load_file('status.kv')
 
 class Writer(BoxLayout):
+    pb = ObjectProperty(None)
+    Key = ObjectProperty(None)
+    Card = ObjectProperty(None)
+    status_val = 0
     def __init__(self,**kwargs):
         super(Writer,self).__init__(**kwargs)
+        self.update_bar_trigger = Clock.create_trigger(self.update_bar)
     def collectData(self):
         data_list = []
         reg = self.ids.bios.reg.text
@@ -42,8 +48,6 @@ class Writer(BoxLayout):
         self.ids.bios.reg.text = ''
         self.ids.bios.serial_no.text = ''
         self.ids.bios.phone_no.text = ''
-        self.ids.bios.cardData.text = ''
-        self.ids.bios.keyData.text = ''
 
     def save_data(self,data_list):
         global conn
@@ -58,16 +62,16 @@ class Writer(BoxLayout):
             data_tuple = tuple(data_list)
             cursor.execute(sqlite_insert_with_param, data_tuple)
             conn.commit()# data saved
-            # content
-            box = BoxLayout(orientation="vertical")
-            box.add_widget(Label(markup=True,text="[color=00FF00][b]Data saved[/b][/color]"))
-            box.add_widget(ProgressBar(max=100, value=40))
             popup = Popup(title = "Info" , size_hint=(None, None), size=(Window.width/4, Window.height/4),
-                          content=box,
+                          content=Label(markup=True,text="[color=00FF00][b]Data saved[/b][/color]"),
                           auto_dismiss=True)
             popup.open()
+            # indicate achievement
+            self.status_val = 1
             # clear window
             self.clearWindowData()
+            Clock.schedule_interval(self.pb_checker, 1)
+            Clock.schedule_interval(self.adder, 3)
             cursor.close()
         except sqlite3.Error as error:
             popup = Popup(title = "Error" , size_hint=(None, None), size=(Window.width/2,Window.height/3),
@@ -77,6 +81,24 @@ class Writer(BoxLayout):
         finally:
             if (conn):
                 conn.close()
+
+    def pb_checker(self,dt):
+        if self.status_val < 3:
+            self.update_bar_trigger()
+        else:
+            Clock.unschedule(self.pb_checker)
+
+    def update_bar(self,dt):
+        if self.status_val == 1:
+            self.ids.pb.value = (100/3) * 1
+        elif self.status_val == 2:
+            self.ids.pb.value = (100/3) * 2
+            self.ids.status.Key.text = "Key Written"
+        elif self.status_val == 3:
+            self.ids.pb.value = 100
+            self.ids.status.Card.text = "Card Written"
+    def adder(self,dt):
+        self.status_val = self.status_val + 1
 class writeApp(App):
     def build(self):
         return Writer()
