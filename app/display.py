@@ -46,7 +46,7 @@ class Display(AnchorLayout):
         , 'card14', 'card15', 'card16', 'card17', 'card18', 'card19', 'card20', 'card21', 'card22', 'card23', 'card24',
              'card25', 'card26'
         , 'card27', 'card28', 'card29']
-    db_path = "../DataBase/testData.db"
+    db_path = "../data/testData.db"
 
     # SqlDict
     dict_sqlite = 'data.sqlite'
