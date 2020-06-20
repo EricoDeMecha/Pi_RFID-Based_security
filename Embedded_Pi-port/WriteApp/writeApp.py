@@ -93,10 +93,12 @@ class Writer(BoxLayout):
             self.ids.pb.value = (100/3) * 1
         elif self.status_val == 2:
             self.ids.pb.value = (100/3) * 2
-            self.ids.status.Key.text = "Key Written"
+            self.ids.bios.keyData.text = ''
+            self.ids.status.keyBtn.text = "Key Written"
         elif self.status_val == 3:
             self.ids.pb.value = 100
-            self.ids.status.Card.text = "Card Written"
+            self.ids.bios.cardData.text = ''
+            self.ids.status.cardBtn.text = "Card Written"
     def adder(self,dt):
         self.status_val = self.status_val + 1
 class writeApp(App):
