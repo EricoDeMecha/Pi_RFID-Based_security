@@ -6,4 +6,17 @@ time possible.
 
 ### Hardware
  RFID-Key Ring ![Key ring Image](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/key_ring.png)
+  125KHz
   
+ RFID card ![card](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/RFID_tags.png)
+ 13Mhz
+ 
+ RFID reader ![reader](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/card_reader.png)
+ 
+ Raspbery pi ![pi](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/Raspberry_pi.png)
+ 
+ A breadboard and just a bunch of jumper wires
+ 
+ ### Detailed project description 
+ 
+ 
