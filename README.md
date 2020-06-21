@@ -19,4 +19,24 @@ time possible.
  
  ### Detailed project description 
  
+ * Students register their details 
+ ![write App](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/writeApp.png)
  
+ * All the information from the above interface is saved in the main database.
+ 
+ * Key and card names are written digitally to the key ring and the card tag respectively,digitally.
+ 
+ * Student carries the key ring and the card tag is attached permanently to the student's laptop
+ 
+ * At the gate, scanner_1 which only detect cards, automatically detects student's laptop
+ even while in the bag. 
+            ![display](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/displayApp.png)
+           
+ * The system's program pulls students data from the main database based on data from the detected card
+ and stores the data in a temporary database. If the card_data isn't recognized and card is
+ displayed as unrecognized.
+ 
+ * Student then swipes the low frequency key ring on scanner_2. The system's program then
+ matches the key data with the data in the temporary database. 
+ 
+ * If found, the verification is complete, else the key data is displayed as unrecognized.
