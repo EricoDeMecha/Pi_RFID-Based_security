@@ -9,13 +9,13 @@ RFID card to verify the other.
 
 #### MFRC522
 
- 1. RFID-Key Ring ![Key ring Image](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/key_ring.jpg)
+ 1. RFID-Key Ring ![Key ring Image](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/assets/key_ring.jpg)
   125KHz
   
- 2. RFID card ![card](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/RFID_tags.png)
+ 2. RFID card ![card](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/assets/card.jpeg)
  13Mhz
  
- 3. RFID reader ![reader](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/card_reader.jpg)
+ 3. RFID reader ![reader](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/assets/reader.jpg)
  
  ### Ideal situation 
 
