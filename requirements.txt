@@ -1,2 +1,2 @@
-kivy
-sqlitedict
+.gitignore
+venv/

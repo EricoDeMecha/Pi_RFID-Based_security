@@ -6,13 +6,16 @@ RFID card to verify the other.
 
 
 ### Hardware
- RFID-Key Ring ![Key ring Image](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/key_ring.jpg)
+
+#### MFRC522
+
+ 1. RFID-Key Ring ![Key ring Image](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/key_ring.jpg)
   125KHz
   
- RFID card ![card](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/RFID_tags.png)
+ 2. RFID card ![card](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/RFID_tags.png)
  13Mhz
  
- RFID reader ![reader](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/card_reader.jpg)
+ 3. RFID reader ![reader](https://github.com/EricoDeMecha/Pi_RFID-Based_security/blob/master/data/img/card_reader.jpg)
  
  ### Ideal situation 
 

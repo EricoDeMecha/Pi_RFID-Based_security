@@ -1,0 +1,3 @@
+[submodule "micropython-mfrc522-esp32"]
+	path = micropython-mfrc522-esp32
+	url = https://github.com/Tasm-Devil/micropython-mfrc522-esp32.git
