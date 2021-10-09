@@ -1,3 +1,6 @@
 [submodule "micropython-mfrc522-esp32"]
 	path = micropython-mfrc522-esp32
 	url = https://github.com/Tasm-Devil/micropython-mfrc522-esp32.git
+[submodule "2021-project-hack"]
+	path = 2021-project-hack
+	url = git@github.com:smithjilks/2021-project-hack.git
